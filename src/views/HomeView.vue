@@ -39,9 +39,18 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const previewCity = (searchResult) => {
   console.log(searchResult)
+  const city = searchResult.name
+  const state = searchResult.state
+  const lat = searchResult.lat
+  const lon = searchResult.lon
   router.push({
     name: 'cityview',
-    params: {}
+    params: { state, city },
+    query: {
+      lat: lat,
+      lon: lon,
+      preview: true
+    }
   })
 }
 
