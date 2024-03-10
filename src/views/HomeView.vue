@@ -35,6 +35,10 @@
 import axios from 'axios'
 import { ref } from 'vue'
 
+const previewCity = (searchResult) => {
+  console.log(searchResult)
+}
+
 const mapboxAPIKey = '0cc9e70ed1c45d1f75ad22b3365aba0c'
 const searchQuery = ref('')
 const queryTimeOut = ref(null)
