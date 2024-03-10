@@ -23,7 +23,8 @@
             class="py-2 cursor-pointer"
             @click="previewCity(searchResult)"
           >
-            {{ searchResult.name }}
+            {{ searchResult.name }}, {{ searchResult.state }},
+            {{ searchResult.counrty }}
           </li>
         </template>
       </ul>
@@ -34,9 +35,14 @@
 <script setup>
 import axios from 'axios'
 import { ref } from 'vue'
-
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const previewCity = (searchResult) => {
   console.log(searchResult)
+  router.push({
+    name: 'cityview',
+    params: {}
+  })
 }
 
 const mapboxAPIKey = '0cc9e70ed1c45d1f75ad22b3365aba0c'
@@ -53,9 +59,13 @@ const getSearchResults = () => {
           `https://api.openweathermap.org/geo/1.0/direct?q=${searchQuery.value}&limit=5&appid=${mapboxAPIKey}`
         )
         if (response.data && response.data.length > 0) {
-          mapboxSearchResults.value = response.data.map((city) => ({
-            id: city.name,
-            name: `${city.name}, ${city.state}, ${city.country}`
+          mapboxSearchResults.value = response.data.map((data) => ({
+            id: data.name,
+            name: `${data.name}`,
+            state: `${data.state}`,
+            counrty: `${data.country}`,
+            lat: `${data.lat}`,
+            lon: `${data.lon}`
           }))
         } else {
           mapboxSearchResults.value = []
