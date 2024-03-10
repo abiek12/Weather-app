@@ -13,7 +13,7 @@
         v-if="mapboxSearchResults"
       >
         <p class="py-2" v-if="searchError">Sorry, something went wrong, please try again.</p>
-        <p class="py-2" v-if="!searchError && mapboxSearchResults.length === 0">
+        <p class="py-2" v-if="!serverError && mapboxSearchResults.length === 0">
           No results match your query, try a different term.
         </p>
         <template v-else>
@@ -51,14 +51,14 @@ const getSearchResults = () => {
         if (response.data && response.data.length > 0) {
           mapboxSearchResults.value = response.data.map((city) => ({
             id: city.name,
-            name: city.name
+            name: `${city.name}, ${city.state}, ${city.country}`
           }))
         } else {
-          mapboxSearchResults.value = null
+          mapboxSearchResults.value = []
         }
       } catch (error) {
         console.error('Error fetching data:', error)
-        mapboxSearchResults.value = null
+        mapboxSearchResults.value = []
       }
     } else {
       mapboxSearchResults.value = null
