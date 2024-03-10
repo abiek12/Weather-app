@@ -38,7 +38,6 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const previewCity = (searchResult) => {
-  console.log(searchResult)
   const city = searchResult.name
   const state = searchResult.state
   const lat = searchResult.lat
@@ -54,7 +53,7 @@ const previewCity = (searchResult) => {
   })
 }
 
-const mapboxAPIKey = '0cc9e70ed1c45d1f75ad22b3365aba0c'
+const weatherAPIKey = '0cc9e70ed1c45d1f75ad22b3365aba0c'
 const searchQuery = ref('')
 const queryTimeOut = ref(null)
 const mapboxSearchResults = ref(null)
@@ -65,7 +64,7 @@ const getSearchResults = () => {
     if (searchQuery.value !== '') {
       try {
         const response = await axios.get(
-          `https://api.openweathermap.org/geo/1.0/direct?q=${searchQuery.value}&limit=5&appid=${mapboxAPIKey}`
+          `https://api.openweathermap.org/geo/1.0/direct?q=${searchQuery.value}&limit=5&appid=${weatherAPIKey}`
         )
         if (response.data && response.data.length > 0) {
           mapboxSearchResults.value = response.data.map((data) => ({
