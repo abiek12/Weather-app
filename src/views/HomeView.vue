@@ -14,7 +14,7 @@
 
 <script setup>
 import { Axios } from 'axios'
-import ref from 'vue'
+import { ref } from 'vue'
 
 const mapboxAPIKey = '0cc9e70ed1c45d1f75ad22b3365aba0c'
 const searchQuery = ref('')
@@ -29,6 +29,7 @@ const getSearchResults = () => {
         `http://api.openweathermap.org/data/2.5/forecast?id=${searchQuery}&appid=${mapboxAPIKey}`
       )
       mapboxSearchResults.value = result.data.features
+      console.log(mapboxSearchResults)
       return
     }
     mapboxSearchResults.value = null
