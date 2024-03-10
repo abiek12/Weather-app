@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { Axios } from 'axios'
+import axios from 'axios'
 import { ref } from 'vue'
 
 const mapboxAPIKey = '0cc9e70ed1c45d1f75ad22b3365aba0c'
@@ -25,8 +25,8 @@ const getSearchResults = () => {
   clearTimeout(queryTimeOut.value)
   queryTimeOut.value = setTimeout(async () => {
     if (searchQuery.value !== '') {
-      const result = await Axios.get(
-        `http://api.openweathermap.org/data/2.5/forecast?id=${searchQuery}&appid=${mapboxAPIKey}`
+      const result = await axios.get(
+        `http://api.openweathermap.org/geo/1.0/direct?q=${searchQuery.value}&limit=5&appid=${mapboxAPIKey}`
       )
       mapboxSearchResults.value = result.data.features
       console.log(mapboxSearchResults)
