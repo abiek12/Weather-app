@@ -1,5 +1,26 @@
 <template>
-  <div></div>
+  <div class="flex flex-col flex-1 items-center">
+    <!-- Banner -->
+    <div
+      v-if="route.currentRoute.value.query.preview"
+      class="text-white p-4 bg-weather-secondary w-full text-center"
+    >
+      <p>You are currently previewing this city, click the "+" icon to start tracking this city.</p>
+    </div>
+    <!-- Weather Overview -->
+    <div class="flex flex-col items-center text-white py-12">
+      <h1 class="text-4xl mb-2">{{ route.currentRoute.value.params.city }}</h1>
+      <p class="text-sm mb-12">
+        {{
+          new Date(weatherData.data.currentTime).toLocaleDateString('en-us', {
+            weekday: 'short',
+            day: '2-digit',
+            month: 'long'
+          })
+        }}
+      </p>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -17,13 +38,12 @@ const getWeatheraData = async () => {
     )
     // cal current date & time
     const localOffset = new Date().getTimezoneOffset() * 60000
-    const utc = weatherData.data.list.dt * 1000 + localOffset
-    weatherData.data.currentTime = utc + 1000 * weatherData.data.timezone_offset
-
+    const utc = weatherData.data.list[0].dt * 1000 + localOffset
+    weatherData.data.currentTime = utc + 1000 * weatherData.data.city.timezone
     // cal hourly weather offset
     weatherData.data.list.forEach((hour) => {
       const utc = hour.dt * 1000 + localOffset
-      hour.currentTime = utc + 1000 * weatherData.data.timezone_offset
+      hour.currentTime = utc + 1000 * weatherData.data.city.timezone
     })
     return weatherData
   } catch (error) {
