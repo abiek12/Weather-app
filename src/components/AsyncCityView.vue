@@ -25,6 +25,18 @@
         }}
       </p>
       <p class="text-8xl mb-8">{{ Math.round(weatherData.data.list[0].main.temp) }}&deg;</p>
+      <p>
+        Feels like
+        {{ Math.round(weatherData.data.list[0].main.feels_like) }} &deg;
+      </p>
+      <p class="capitalize">
+        {{ weatherData.data.list[0].weather[0].description }}
+      </p>
+      <img
+        class="w-[150px] h-auto"
+        :src="`http://openweathermap.org/img/wn/${weatherData.data.list[0].weather[0].icon}@2x.png`"
+        alt=""
+      />
     </div>
   </div>
 </template>
