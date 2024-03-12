@@ -11,6 +11,7 @@
       <div class="flex gap-3 flex-1 justify-end">
         <i
           class="fa-solid fa-plus text-xl hover:text-weather-secondary duration-150 cursor-pointer"
+          @click="addcity"
         ></i>
       </div>
     </nav>
@@ -18,7 +19,29 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'\
+import { uid } from 'uid';
+import { ref } from 'vue'
+
+const savedCities = ref([])
+const route=useRoute()
+const addcity = () => {
+  if (localStorage.getItem('savedCities')) {
+    savedCities.value = JSON.parse(localStorage.getItem(savedCities))
+  }
+
+  const locationObj={
+    id:uid(),
+    state:route.params.state,
+    coords:{
+      lat:route.query.lat,
+      lon:route.query.lon
+    }
+  }
+
+  savedCities.value.push(locationObj)
+  localStorage.setItem('savedCities',JSON.stringify(savedCities.value))
+}
 </script>
 
 <style lang="scss" scoped></style>
