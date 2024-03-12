@@ -12,7 +12,7 @@
         <i
           class="fa-solid fa-plus text-xl hover:text-weather-secondary duration-150 cursor-pointer"
           @click="addcity"
-          v-if="route.query.preview"
+          v-if="route.query"
         ></i>
       </div>
     </nav>
@@ -29,7 +29,7 @@ const route = useRoute()
 const router = useRouter()
 const addcity = () => {
   if (localStorage.getItem('savedCities')) {
-    savedCities.value = JSON.parse(localStorage.getItem(savedCities))
+    savedCities.value = JSON.parse(localStorage.getItem('savedCities'))
   }
 
   const locationObj = {
@@ -47,7 +47,7 @@ const addcity = () => {
   let query = Object.assign({}, route.query)
   delete query.preview
   router.replace({ query })
+  query.id = locationObj.id
+  router.replace({ query })
 }
 </script>
-
-<style lang="scss" scoped></style>
