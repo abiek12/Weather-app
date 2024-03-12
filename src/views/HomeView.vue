@@ -56,7 +56,7 @@ const previewCity = (searchResult) => {
 const weatherAPIKey = '0cc9e70ed1c45d1f75ad22b3365aba0c'
 const searchQuery = ref('')
 const queryTimeOut = ref(null)
-const openWeatherSearchResults = ref(null)
+const mapboxSearchResults = ref(null)
 
 const getSearchResults = () => {
   clearTimeout(queryTimeOut.value)
@@ -67,7 +67,7 @@ const getSearchResults = () => {
           `https://api.openweathermap.org/geo/1.0/direct?q=${searchQuery.value}&limit=5&appid=${weatherAPIKey}`
         )
         if (response.data && response.data.length > 0) {
-          openWeatherSearchResults.value = response.data.map((data) => ({
+          mapboxSearchResults.value = response.data.map((data) => ({
             id: data.name,
             name: `${data.name}`,
             state: `${data.state}`,
@@ -76,14 +76,14 @@ const getSearchResults = () => {
             lon: `${data.lon}`
           }))
         } else {
-          openWeatherSearchResults.value = []
+          mapboxSearchResults.value = []
         }
       } catch (error) {
         console.error('Error fetching data:', error)
-        openWeatherSearchResults.value = []
+        mapboxSearchResults.value = []
       }
     } else {
-      openWeatherSearchResults.value = null
+      mapboxSearchResults.value = null
     }
   }, 300)
 }
