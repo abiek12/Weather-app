@@ -37,11 +37,11 @@ const router = useRouter()
 const goToCityView = (cities) => {
   const id = cities.id
   const state = cities.state
-  const city = cities.name
+  const city = cities.weather.name
   const lat = cities.coords.lat
   const lon = cities.coords.lon
   router.push({
-    name: 'cityView',
+    name: 'cityview',
     params: { state, city },
     query: { id: id, lat: lat, lon: lon }
   })

@@ -49,5 +49,9 @@ const addcity = () => {
   router.replace({ query })
   query.id = locationObj.id
   router.replace({ query })
+
+  router.push({
+    name: 'home'
+  })
 }
 </script>
