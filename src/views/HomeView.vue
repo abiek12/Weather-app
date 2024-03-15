@@ -33,7 +33,7 @@
       <Suspense>
         <CityList />
         <template #fallback>
-          <p>Loading...</p>
+          <CityCardSkelton />
         </template>
       </Suspense>
     </div>
@@ -41,6 +41,7 @@
 </template>
 
 <script setup>
+import CityCardSkelton from '@/components/CityCardSkelton.vue'
 import CityList from '@/components/CityList.vue'
 import axios from 'axios'
 import { ref } from 'vue'
