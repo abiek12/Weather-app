@@ -1,6 +1,6 @@
 # Weather Application
 
-This is a simple weather application developed using Vue.js and Tailwind CSS. It fetches weather information from the OpenWeatherMap API and displays it in a user-friendly interface. Users can search for weather by city name, save multiple locations, and view weather forecasts.
+A simple weather application developed using Vue.js and Tailwind CSS. It fetches weather information from the OpenWeatherMap API and displays it in a user-friendly interface. Users can search for weather by city name, save multiple locations, and view weather forecasts.
 
 ## Features
 
