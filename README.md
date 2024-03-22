@@ -14,7 +14,6 @@ A simple weather application developed using Vue.js and Tailwind CSS. It fetches
 
 - Vue.js
 - Tailwind CSS
-- Axios
 
 ## Getting Started
 
